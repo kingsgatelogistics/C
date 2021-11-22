@@ -1,0 +1,16 @@
+.btn-next{
+    line-height: 1.2;
+    background-color: #318597;
+    border: 0;
+    width:40%;
+    margin:5%;
+    color: white;
+
+    /* padding-left:30px;
+    padding-right: 30px; */
+    
+}
+
+::ng-deep .mat-dialog-container{
+    padding:10px;
+}

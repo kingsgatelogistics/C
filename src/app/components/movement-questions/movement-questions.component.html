@@ -1,0 +1,50 @@
+
+
+<div class="question-container" *ngIf="activeQuestion != null">
+    <form *ngIf="fieldForm" [formGroup]="fieldForm" (submit)="onAnswerFormSubmit(fieldForm)" class="form-wizard">
+        <div class="question-count-container">
+            <p class="question-count">Question <span style="color:#318597;font-weight: 600;">{{currentQuestion}}</span>/{{totalQuestions}}</p>
+        </div> 
+        <div class="question-label-container">
+            <mat-label>
+                {{activeQuestion.question_text}}
+            </mat-label>
+        </div>
+        <div *ngFor="let field of fields; let i = index" class="field" class="field-container" [ngClass]="{'invisible': activeField && fields[i].field_Id != activeField.field_Id || loading}">
+            <app-field  [field]="field" [fieldForm]="fieldForm"></app-field>
+        </div>
+        <div class="error-container">
+
+        </div>
+        <div class="next-button-container">
+            <button 
+            [ngClass]="{'invisible' : activeField && activeField.field_Id == firstFieldId }"
+
+            class="btn btn-primary btn-next" 
+            (click)="prevField(fieldForm)" 
+            type="button"
+            style="margin-right:auto;"
+            >
+                Prev
+                <fa-icon [icon]="faChevronLeft" style="float: left;"></fa-icon>
+            </button>
+            <button  
+            [ngClass]="{'invisible' : activeField && activeField.field_Id == lastFieldId}"
+
+            class="btn btn-primary btn-next" 
+            (click)="nextField(fieldForm)" 
+            type="button"
+            style="margin-left:auto;">
+                Next
+                <fa-icon [icon]="faChevronRight" style="float: right;"></fa-icon>
+            </button>
+            <button 
+            [ngClass]="{'invisible': activeField && activeField.field_Id != lastFieldId}" 
+            class="btn btn-primary btn-next btn-submit" >Submit</button> 
+        </div>
+    </form>
+
+    <div *ngIf="nullFieldError" class="error-message">
+        {{activeField.name}} is required!
+    </div>
+</div>

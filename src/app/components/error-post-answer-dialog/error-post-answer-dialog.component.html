@@ -1,0 +1,14 @@
+<div style="text-align: center;">
+    <h1 >We're sorry!</h1>
+    <div mat-dialog-content>
+        <p>Submission failed with the following error:</p>
+        <p>{{data.error}}</p>
+    </div>
+    <div mat-dialog-actions>
+        <button class="btn btn-next" mat-button (click)="tryAgain()" >Try Again</button>
+        <button class="btn btn-next" mat-button (click)="nextMovement()" >Skip Load</button>
+        <button class="btn btn-next" mat-button (click)="reenter()" >Reenter Answers</button>
+
+    </div>
+</div>
+

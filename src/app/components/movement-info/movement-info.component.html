@@ -1,0 +1,225 @@
+<!-- <div class="movement-nav-buttons d-inline-flex justify-content-between position-fixed" [@movementNavUpdate]='isOpen' >
+    <div class="movement-nav-col text-center" >
+        <button class="btn btn-primary text-center btn-movement-change">
+            <fa-icon [icon]="faChevronLeft" style="float: left;"></fa-icon> prev movement
+        </button>
+    </div>
+    <div class="movement-nav-col text-center" >
+        <button class="btn btn-primary btn-movement-change"> 
+            next movement <fa-icon [icon]="faChevronRight" style="float: right;"></fa-icon>
+        </button> [@.disabled]="disableAnimations"
+    </div>
+</div> -->
+<div [@.disabled]="disableAnimations" *ngIf="movement != null">
+
+    <div class="movement-nav d-flex justify-content-center" style="max-width: 600px;">
+            <button (click)='toggleOpenInfo("movement")' class="btn btn-primary btn-title btn-movement-title d-flex flex-wrap justify-content-center">
+                <div>
+                    <div style="font-weight: 600; font-size: 18px;">
+                        Load Info: #{{movement.order_numbers}}
+                    </div >
+                    <div style="font-weight:400; font-size:14px;">
+                        {{movement.pickup_city_name}} <fa-icon [icon]="faLongArrowRight"></fa-icon> {{movement.delivery_city_name}}
+                    </div>
+                </div>&nbsp;
+                <fa-icon [hidden]="movementDisplay != activeDisplay" [icon]="faChevronUp"></fa-icon>
+                <fa-icon [hidden]="movementDisplay == activeDisplay" [icon]="faChevronDown"></fa-icon>
+            </button>
+    </div>
+    
+    
+    <div #movmentInfoContainer  [@detailExpanded]="movementDisplay == activeDisplay ? 'expanded' : 'collapsed'" #movementInfoContainer class="info-view open-close-container" style="position: relative; bottom: 7px; z-index: 2;" >
+        <div class="movement-info-container info-container" [ngClass]="{'flat-border': stopNeeded}">
+            <div class="container" style="padding-top:15px; padding-bottom:4px;">
+               
+                <div class="row no-gutters">
+                    <!-- <div class="col-4 left-info">
+                        Movement ID:
+                    </div>
+                    <div class="col-8 right-info">
+                        {{movement.movement_id}}
+                    </div> -->
+                </div>
+                <div class="row no-gutters">
+                    <div class="col-4 left-info">
+                        Order Number(s):
+                    </div>
+                    <div class="col-8 right-info">
+                        {{movement.order_numbers}}
+                    </div>
+                </div>
+                <div class="row no-gutters">
+                    <div class="col-4 left-info">
+                        Pickup:
+                    </div>
+                    <div class="col-8 right-info">
+                        {{movement.pickup_location}} {{movement.pickup_city_name}} {{movement.pickup_state}}
+                    </div>
+                </div>
+                <div class="row no-gutters">
+                    <div class="col-4 left-info">
+                        Delivery:
+                    </div>
+                    <div class="col-8 right-info">
+                        {{movement.delivery_location}} {{movement.delivery_city_name}} {{movement.delivery_state}}
+                    </div>
+                </div>
+                <!-- <div class="row no-gutters">
+    
+                    <div class="col-4 left-info">
+                        Unanswered Questions:
+                    </div>
+                    <div class="col-8 right-info">
+                        {{movement.unansweredQuestions}}
+                    </div>
+                </div>
+                <div class="row no-gutters last-row">
+                    <div class="col-4 left-info">
+                        Open Stops:
+                    </div>
+                    <div class="col-8 right-info">
+                        {{movement.openStops}}
+                    </div>
+                </div> -->
+            </div>
+            <!-- </div>
+                <div *ngFor="let property of movementProperties" class="row no-gutters">
+                    <div class="col-4 left-info">
+                        {{property.property}}:
+                    </div>
+                    <div class="col-8 right-info">
+                        {{property.value}}
+                    </div>
+                </div>
+            </div> -->
+        </div>
+        <!-- <div style="
+        border-bottom: 4px solid #E5E5E5;
+        border-radius: 0px 0px 4px 4px;
+        position:relative;
+        top:3px;"
+        >
+    
+        </div> -->
+    
+    
+    </div>
+
+
+<!-- STOP -->
+    <div [hidden]="!stopNeeded" *ngIf="stop != null">
+        <!-- <div class="filler-div" >
+
+        </div> -->
+        <div #stopInfoContainer  [@detailExpanded]="stopDisplay == activeDisplay ? 'expanded' : 'collapsed'"  class="info-view open-close-container"style="position: relative; bottom: 15px;" >
+            <div class="stop-info-container info-container">
+                <div class="container">
+                    <!-- <div class="row no-gutters">
+                        <div class="col-4 left-info">
+                            Stop ID:
+                        </div>
+                        <div class="col-8 right-info">
+                            {{stop.stop_id}}
+                        </div>
+                    </div>
+                    <div class="row no-gutters">
+                        <div class="col-4 left-info">
+                            Stop type:
+                        </div>
+                        <div class="col-8 right-info">
+                            {{stop.stop_type}}
+                        </div>
+                    </div> -->
+                    <div class="row no-gutters">
+                        <div class="col-4 left-info">
+                            Location:
+                        </div>
+                        <div class="col-8 right-info">
+                            <!-- {{stop.stop_location_name}}  -->
+                            {{stop.stop_city_name}} {{stop.stop_state}}
+                        </div>
+                    </div>
+                    <div class="row no-gutters">
+                        <div class="col-4 left-info">
+                            Sequence:
+                        </div>
+                        <div class="col-8 right-info">
+                            {{stop.stop_movement_sequence}}
+                        </div>
+                    </div>
+                    <div class="row no-gutters">
+        
+                        <div class="col-4 left-info">
+                            Earliest Scheduled Arrival:
+                        </div>
+                        <div class="col-8 right-info">
+                            {{stop.sched_arrive_early_date}} {{stop.sched_arrive_early_time}}
+                        </div>
+                    </div>
+                    <div class="row no-gutters">
+        
+                        <div class="col-4 left-info">
+                            Latest Scheduled Arrival:
+                        </div>
+                        <div class="col-8 right-info">
+                            {{stop.sched_arrive_late_date}} {{stop.sched_arrive_late_time}}
+                        </div>
+                    </div>
+                    <div class="row no-gutters">
+        
+                        <div class="col-4 left-info">
+                            Actual Arrival:
+                        </div>
+                        <div class="col-8 right-info">
+                            {{stop.actual_arrival_time}} {{stop.actual_arrival_date}}
+                        </div>
+                    </div>
+                    <div class="row no-gutters last-row">
+        
+                        <div class="col-4 left-info">
+                            Actual Departure:
+                        </div>
+                        <div class="col-8 right-info">
+                            {{stop.actual_departure_time}} {{stop.actual_departure_date}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- <div style="
+            border-bottom: 4px solid #E5E5E5;
+            border-radius: 0px 0px 4px 4px;
+            position:relative;
+            top:3px;"
+            >
+        
+            </div>
+            <div style="
+            height:31px; 
+            background-color:#0d3940; 
+            border-left: 3px solid black; 
+            border-right: 3px solid black; 
+            text-align: center;"
+            >
+                <button  class="btn btn-primary hide-button" (click)="toggleStopHide()" >Hide <fa-icon [icon]="faChevronUp"></fa-icon></button>
+            </div> -->
+        
+        </div>
+        <div class="stop-nav d-flex justify-content-center" style="position: relative; bottom: 15px;padding-top: 15px;background-color: #7b8937;border-radius: 0 0 6px 6px;">
+            <button (click)='toggleOpenInfo("stop")' class="btn btn-primary btn-title btn-stop-title d-flex flex-wrap justify-content-center">
+                <div style="font-weight: 600; font-size: 18px;">Stop Info: {{stop.stop_location_name}}</div>&nbsp;<fa-icon [hidden]="!stopUpChevron" [icon]="faChevronUp"></fa-icon><fa-icon [hidden]="stopUpChevron" [icon]="faChevronDown"></fa-icon>
+            </button>
+        </div>
+    </div>
+</div>
+    
+<!-- <div style="
+height:31px; 
+background-color:#0d3940; 
+border-left: 3px solid black; 
+border-right: 3px solid black; 
+text-align: center;"
+>
+    <button  class="btn btn-primary hide-button" (click)="toggleBothHide()" >Hide <fa-icon [icon]="faChevronUp"></fa-icon></button>
+</div> -->
+

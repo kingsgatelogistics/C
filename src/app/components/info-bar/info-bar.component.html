@@ -1,0 +1,23 @@
+<div *ngIf='!trackingComplete' style="background-color: #0d3940; ">
+    <div class="info-bar-container d-flex">
+        <div>
+            <p>Hello, {{carrierName}}</p>
+        </div>
+        <div class="ml-auto">
+            <p>Load <span style="color:#EE9518;font-weight: 600;">{{currentMovementNumber || 0}}</span>/{{totalMovementNumber || 0}}</p>
+        </div>
+    </div>
+    
+    <app-movement-info >
+    </app-movement-info>
+
+    <app-movement-questions 
+    [trackingKey]="trackingKey"
+    >
+    </app-movement-questions>
+</div>
+
+<div *ngIf='trackingComplete'>
+    
+</div>
+

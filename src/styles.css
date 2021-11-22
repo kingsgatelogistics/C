@@ -1,0 +1,49 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+    line-height: 1;
+    font-family: 'Open Sans', arial, sans-serif;
+    color:#E5E5E5;
+    background-color: #E5E5E5;
+}
+
+
+
+.btn-primary:not(:disabled):not(.disabled):active{
+    background-color: #318597;
+    border-color:#318597;
+}
+
+.form-control:focus{
+    border-color: #318597;
+}
+
+
+.questions-container{
+    background-color: #0d3940;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    padding-top: 30px;
+    border-right: 3px solid black;
+    border-left: 3px solid black;
+    border-bottom: 3px solid black;
+    text-align: center;
+    
+}
+
+
+
+
+.type-container{
+    padding-bottom: 10px;
+    width: 100%;
+}
+
+
+/* .answer-container{
+
+} */
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -1,0 +1,25 @@
+a img {
+    width: 100%;
+}
+
+a {
+    width: 200px;
+}
+
+.nav-container{
+    height: 57px;
+    line-height: 1;
+    background-color: white;
+    width:100%;
+    justify-content: center;
+}
+
+.logo-container{
+    display: block;
+    width:200px;
+}
+
+.hamburger-menu-container{
+    padding-top: 16px;
+    padding-right: 10px;
+}

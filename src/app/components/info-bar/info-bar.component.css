@@ -1,0 +1,26 @@
+.info-bar-container{
+    border-left: 3px solid black;
+    border-right: 3px solid black;
+    border-top: 3px solid black;
+
+    padding-right: 7px;
+    padding-left: 7px;
+
+    line-height: 1.7;
+    height:27px;
+
+    background-color:#0d3940 ;
+    
+    top: 54px;
+    width:100%;
+
+
+}
+
+p{
+    margin-bottom: 0;
+    color: #E5E5E5;
+    font-weight: 400;
+    font-size: 14px;
+
+}

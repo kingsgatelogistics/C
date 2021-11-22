@@ -1,0 +1,98 @@
+<div [formGroup]="fieldForm">
+    <div class="field-description-container">
+        <label class="description" [attr.for]="field.field_Id">
+            {{field.name}}:
+        </label>
+    </div>
+    <div [ngSwitch]="field.type">
+
+        <div *ngSwitchCase="'BIT'" [id]="field.field_Id">
+
+            <mat-radio-group
+            aria-labelledby="example-radio-group-label"
+            class="example-radio-group"
+            [formControlName]="field.field_Id"
+            >
+                <mat-radio-button class="example-radio-button"  [value]="true" >
+                    Yes
+                </mat-radio-button>
+                <mat-radio-button class="example-radio-button"  [value]="false">
+                    No
+                </mat-radio-button>
+            </mat-radio-group>
+
+        </div>
+
+        <div *ngSwitchCase="'INT'" [id]="field.field_Id" >
+            <mat-form-field appearance="fill">
+                <input 
+                matInput 
+                #input  
+                placeholder="Enter Answer" 
+                 
+                [formControlName]="field.field_Id"
+                (keypress)="keyPressNumbers($event)">
+            </mat-form-field>
+
+        </div>
+
+        <div *ngSwitchCase="'TEXT'" [id]="field.field_Id" >
+            <mat-form-field hintLabel="Max 250 characters" appearance="fill">
+                <input matInput #input maxlength="250" placeholder="Enter Answer"  [formControlName]="field.field_Id">
+                <mat-hint align="end">{{input.value?.length || 0}}/250</mat-hint>
+            </mat-form-field>
+        </div>
+
+        <div *ngSwitchCase="'DATE'" [id]="field.field_Id" style="text-align: center;">
+        
+            <mat-form-field appearance="fill">
+                <mat-label>Date: </mat-label>
+                <input 
+                matInput 
+                [matDatepicker]="picker"
+                placeholder="MM/DD/YYYY"
+                [formControlName]="field.field_Id">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+                  
+        </div>
+        <div *ngSwitchCase="'TIME'" [id]="field.field_Id" style="text-align: center;">
+            <div class="d-inline-flex" >
+
+                
+                <ngb-timepicker 
+                [formControlName]="field.field_Id" 
+                [meridian]="meridian"
+                [minuteStep]="10"
+                ></ngb-timepicker>
+
+                <!-- <div class="editable-dial-example">
+                    <input  
+                    matInput
+                    placeholder="HH:mm a" 
+                    aria-label="Editable dial"
+                    [ngxTimepicker]="editableDial" 
+                    readonly 
+                    [formControlName]="field.field_Id">
+                    <ngx-material-timepicker 
+                    #editableDial 
+                    [enableKeyboardInput]="true">
+                    </ngx-material-timepicker>
+                </div> -->
+    
+            </div>
+        </div>
+        <div *ngSwitchCase="'SELECTBIT'" [id]="field.field_Id" class="field-container">
+            <div class="d-inline-flex" >
+                <mat-checkbox class="example-margin description"  [formControlName]="field.field_Id">{{field.name}}</mat-checkbox>
+            </div>
+        </div>
+
+        <div *ngSwitchDefault>
+            ERROR IN DEFINING FIELD TYPE
+        </div>
+
+    </div>
+    <div class="errorMessage" *ngIf="!isValid" >{{errorMessage}}</div>
+</div>

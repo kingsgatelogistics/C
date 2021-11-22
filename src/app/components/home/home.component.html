@@ -1,0 +1,30 @@
+<div class="" style="width: 100%; top:0px; display: flex; align-content: center; justify-content: center;">
+    <div style="max-width: 600px; width:100%">
+        <div *ngIf="loading && state != 'begin'" class="loading-container flex-content-center">
+            <mat-progress-spinner
+              color="primary"
+              mode="indeterminate"
+              style="margin-left: auto;margin-right: auto;">
+            </mat-progress-spinner>
+          </div>
+        <app-nav></app-nav>
+        <div [hidden]="state != 'questions'">
+            <app-info-bar [trackingKey]='trackingKey' [carrierName]='carrierName'></app-info-bar>
+        </div>
+        <div [hidden]="state !='begin'" class="intro-container">
+            <mat-label class="intro-label">
+                Welcome {{carrierName || ''}}, to the Kingsgate Tracking Update Portal!
+            </mat-label>
+            <p>We have questions about {{numberOfMovements || ''}} loads.</p>
+            <button (click)="toggleBegin()" class="btn btn-primary btn-next">
+                Let's begin!
+            </button>
+        </div >
+        <div [hidden]="state !='done'"class="intro-container">
+            <mat-label class="intro-label">
+                Thanks {{carrierName || ''}}, questions for all loads are complete!
+            </mat-label>
+        </div>
+    </div>
+
+</div>
